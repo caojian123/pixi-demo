@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="https://cdn.bootcss.com/pixi.js/5.1.5/pixi.js"></script>
+	<script type="text/javascript">
+      const app = new PIXI.Application({
+      	transparent: true
+      });
+	  const renderer = app.renderer;
+	  document.body.appendChild(app.view);
+
+	  const TextureCache = PIXI.utils.TextureCache;
+	  const Texture = PIXI.Texture;
+	  const Rectangle = PIXI.Rectangle;
+
+	  const imgURL = "https://www.kkkk1000.com/images/learnPixiJS-AnimatedSprite/dnf.png";
+
+	  app.loader.add('sprite',imgURL).load(setup);
+
+	  function setup(){
+	  	 //获取纹理
+         const base = TextureCache[imgURL];
+
+         const texture1 = new Texture(base);
+         texture1.frame = new Rectangle(0,0,80,143);
+
+         const texture2 = new Texture(base);
+         texture2.frame = new Rectangle(80,0,80,143);
+
+         const texture3 = new Texture(base);
+         texture3.frame = new Rectangle(160,0,80,143);
+
+         const texture4 = new Texture(base);
+         texture4.frame = new Rectangle(240,0,80,143);
+
+         //创建纹理数组
+         const textures = [texture1, texture2, texture3,texture4];
+
+         //创建动画精灵
+         const pixie = new PIXI.extras.AnimatedSprite(textures);
+
+
+         //设置动画精灵的速度
+        pixie.animationSpeed=0.1;
+        
+        //把动画精灵添加到舞台
+        app.stage.addChild(pixie);
+        //播放动画精灵
+        pixie.play();
+	  }
+	</script>	
+</body>
+</html>

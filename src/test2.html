@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="https://cdn.bootcss.com/pixi.js/5.1.5/pixi.min.js"></script>
+	<script src="https://www.kkkk1000.com/js/spriteUtilities.js"></script>
+	<script type="text/javascript">
+		const app = new PIXI.Application({
+      		transparent: true
+      	});
+	  	const renderer = app.renderer;
+	  	document.body.appendChild(app.view);
+
+	  	const su = new SpriteUtilities(PIXI);
+
+	  	const imgURL = "https://www.kkkk1000.com/images/learnPixiJS-AnimatedSprite/dnf.png";
+        PIXI.loader.add(imgURL).load(setup);
+
+        function setup(){
+        	const frames = su.filmstrip(imgURL, 80, 143);
+        	const pixie = new PIXI.extras.AnimatedSprite(frames);
+
+        	pixie.animationSpeed = 0.05;
+
+        	app.stage.addChild(pixie);
+        	pixie.play();
+        } 
+	</script>
+</body>
+</html>
