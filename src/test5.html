@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+	</style>
+</head>
+<body>
+	<script src="https://cdn.bootcss.com/pixi.js/5.1.5/pixi.min.js"></script>
+	<script type="text/javascript">
+	const app = new PIXI.Application({
+		transparent:true
+	});
+	const stage = app.stage;
+	const renderer = app.renderer;
+	
+	document.body.appendChild(app.view);
+	//需要加载的图片的地址
+	const woodUrl = "https://kkkk1000.com/images/learnPixiJS-VisualEffects/wood.jpg"; 
+	const groundUrl = "https://kkkk1000.com/images/learnPixiJS-VisualEffects/ground.png";
+
+	const shared = PIXI.Loader.shared;
+	shared.add([woodUrl,groundUrl]).load(setup);
+	
+	let woodSprite;
+	let groundSprite;
+	function setup(loader,resource){
+		groundSprite = new PIXI.TilingSprite(
+		  resource[groundUrl].texture,
+		  window.innerWidth,
+		  179
+		);
+		woodSprite = new PIXI.TilingSprite(
+		  resource[woodUrl].texture,
+		  window.innerWidth,
+		  window.innerHeight
+		);
+		
+		groundSprite.y = window.innerHeight - 179;
+		
+		stage.addChild(woodSprite);
+		stage.addChild(groundSprite);
+		
+		app.ticker.add(() => {
+			groundSprite.tilePosition.x -= 5;
+			woodSprite.tilePosition.x -= 1;
+		})
+	}
+	</script>
+</body>
+</html>

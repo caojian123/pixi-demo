@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="https://cdn.bootcss.com/pixi.js/5.1.5/pixi.min.js"></script>
+	<script type="text/javascript">
+	 const app = new PIXI.Application({
+		width: 400,
+		height: 300,
+	 	transparent:true
+	 });
+	 const renderer = app.renderer;
+	 const stage = app.stage;
+	 document.body.appendChild(app.view);
+	 
+	  //需要加载的图片的地址
+	 const imgURL = "https://www.kkkk1000.com/images/learnPixiJS-VisualEffects/brick.jpg";
+	 
+	 const loader = PIXI.Loader.shared;
+	 //加载图像，加载完成后执行setup函数 
+	 loader.add('brick',imgURL).load(setup);
+	 
+	 let tilingSprite;
+	 function setup(loader,resource){
+		tilingSprite = new PIXI.TilingSprite(
+			resource.brick.texture,
+			400,
+			400
+		);
+		tilingSprite.tint = 0xFFFF660;
+		stage.addChild(tilingSprite);
+		gameloop();
+	 }
+	 
+	 function gameloop(){
+		// requestAnimationFrame(gameloop);
+		// tilingSprite.tilePosition.x -= 1;
+		// renderer.render(stage);
+		app.ticker.add(() => {
+			tilingSprite.tilePosition.x -= 1;
+		})
+	 }
+	</script>
+</body>
+</html>
